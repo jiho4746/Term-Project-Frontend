@@ -1,17 +1,19 @@
 import React from "react";
-import Product from "./Product";
+//import Product from "./Product";
 import ProductRow from "./ProductRow.js";
-import AddProduct from "./AddProduct.js";
+//import AddProduct from "./AddProduct.js";
 import "./App.css";
 import {
-  Paper,
-  List,
-  Container,
-  Table,
+  //Paper,
+  //List,
   AppBar,
-  Toolbar,
+  Container,
   Grid,
+  Tab,
+  Tabs,
+  Toolbar,
   Typography,
+  Table,
   Button,
 } from "@material-ui/core";
 import { call, signout } from "./service/ApiService";
@@ -28,6 +30,7 @@ class App extends React.Component {
       searchResults: [], // 검색 결과를 저장할 배열
       updatedItems: [],
       loading: true, //로딩 중이라는 표시
+      tabValue: 0,
     };
   }
 
@@ -142,11 +145,15 @@ class App extends React.Component {
     }
   };
 
+  handleTabChange = (event, newValue) => {
+    this.setState({ tabValue: newValue });
+  };
+
   render() {
-    const { items, searchResults, loading } = this.state;
+    const { items, searchResults, loading, tabValue } = this.state;
     const productList = searchResults.length > 0 ? searchResults : items;
 
-    const productItems =
+    /*const productItems =
       items.length > 0 && (
         <Paper style={{ margin: 16 }}>
           <List>
@@ -160,12 +167,11 @@ class App extends React.Component {
             ))}
           </List>
         </Paper>
-      );
+      );*/
 
     // table
     const productTable = (
       <div>
-        Todo item table
         <Table border="1">
           <thead>
             <tr>
@@ -190,11 +196,11 @@ class App extends React.Component {
 
     // navigationBar 추가
     const navigationBar = (
-      <AppBar position="static">
+      <AppBar position="static" style={{ backgroundColor: "black" }}>
         <Toolbar>
         <Grid justifyContent="space-between" container>
             <Grid item>
-              <Typography variant="h6">오늘의 할일</Typography>
+              <Typography variant="h6">텀프로젝트3 - 컴퓨터공학과 20200769 박지호</Typography>
             </Grid>
             <Grid>
               <Button color="inherit" onClick={signout}>
@@ -207,6 +213,33 @@ class App extends React.Component {
     );
 
     /* 로딩중이 아닐 때 렌더링 할 부분 */
+    const ProductListPage = (
+      <div>
+        {navigationBar}
+        <Container maxWidth="md">
+          <Tabs value={tabValue} onChange={this.handleTabChange}>
+            <Tab label="Add Product" />
+            <Tab label="Search Product" />
+            <Tab label="Update Product" />
+            <Tab label="Delete Product" />
+          </Tabs>
+          <div style={{ marginTop: "30px" }}>
+            {tabValue === 0 && <UIAddProduct add={this.add} />}
+            {tabValue === 1 && <UISearchProduct search={this.search} />}
+            {tabValue === 2 && (
+              <UIUpdateProduct search={this.search} modify={this.modify} />
+            )}
+            {tabValue === 3 && <UIDeleteProduct remove={this.remove} />}
+          </div>
+        </Container>
+
+        <div style={{ marginTop: "30px" }}>
+        <div className="ProductTable">{productTable}</div>
+      </div>
+      </div>
+    );
+
+    /* 로딩중이 아닐 때 렌더링 할 부분 -텀프로젝트2의 GUI
     const ProductListPage = (
       <div>
         {navigationBar}
@@ -224,7 +257,7 @@ class App extends React.Component {
           <UIDeleteProduct remove={this.remove} />
         </Container>
       </div>
-    );
+    );*/
 
     /* 로딩중일 때 표시할 부분 */
     const LoadingPage = (

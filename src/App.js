@@ -237,7 +237,8 @@ class App extends React.Component {
     );
 
     return (
-      <div className="App">{loading ? ProductListPage : LoadingPage}</div>
+      //<div className="App">{loading ? ProductListPage : LoadingPage}</div>
+      <div className="App">{loading ? LoadingPage : ProductListPage}</div>
     );
   }
 }

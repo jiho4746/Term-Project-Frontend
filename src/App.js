@@ -237,8 +237,9 @@ class App extends React.Component {
     );
 
     return (
-      //<div className="App">{loading ? ProductListPage : LoadingPage}</div>
-      <div className="App">{loading ? LoadingPage : ProductListPage}</div>
+      <div className="App">{loading ? ProductListPage : LoadingPage}</div>
+      // 로그인 여부에 따른 http://localhost:3000/ 페이지 구성은 Login.js의 handleSubmit에 추가 작성 (요구사항X)
+      //<div className="App">{loading ? LoadingPage : ProductListPage}</div>
     );
   }
 }

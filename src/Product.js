@@ -10,6 +10,7 @@ import {
 
 import DeleteOutlined from "@material-ui/icons/DeleteOutlined";
 
+
 class Product extends React.Component {
   // 부모로부터 물려받은 props의 item 속성에 담긴 객체를 state의 item 속성에 담음
   constructor(props) {

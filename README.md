@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+쇼핑몰 웹 응용 프로그램 개발
+---
+### 📍 텀프로젝트 1 : [실행 영상](https://drive.google.com/file/d/17qXIXOidqwLhRZi2v-OFKUNuwDk2giXx/view?usp=drive_link)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**1. 프로젝트 요약**
+- 쇼핑몰 웹 응용 프로그램 개발
+- SPA(Single Page Application)으로 개발
+- 판매할 제품의 종류는 본인이 정함 (예: 도서, 옷, 자동차, 핸드폰 등)
+- 제품의 속성은 4가지로 할 것 (단, title과 userId 라는 속성은 반드시 가질 것) 
+- 데이터베이스에 제품 정보 저장 시 id 값은 자동으로 생성되도록 함
 
-## Available Scripts
+**2. 구조: 레이어드 아키텍처**
+- 콘트롤러, 서비스, 퍼시스턴스
 
-In the project directory, you can run:
+**3. 기능**
+| 기능                           | 설명                                                          |
+|-------------------------------|--------------------------------------------------------------|
+| 제품 정보 추가 기능 (POST)      | 클라이언트로부터 제품 한 개의 정보를 받아 데이터베이스에 추가<br>- 현재 존재하는 모든 제품 리스트를 반환 (status code와 함께) |
+| 제품 정보 검색 기능 (GET)        | 클라이언트로부터 제품의 title 속성 값을 받아 해당 제품을 데이터베이스에서 검색<br>- 검색된 모든 제품 리스트를 반환 (status code와 함께) |
+| 제품 정보 수정 기능 (PUT)        | 클라이언트로부터 전달받은 정보 중 id 속성 값을 이용하여 제품을 찾아 수정<br>- 수정된 제품의 정보를 반환 (status code와 함께) |
+| 제품 정보 삭제 기능 (DELETE)     | 클라이언트로부터 전달받은 정보 중 id 속성 값을 이용하여 제품을 찾아 삭제<br>- 삭제 후의 모든 제품 리스트를 반환 (status code와 함께) |
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**4. 제한조건**
+- 특별한 언급이 없는 경우 교재와 동일하게 구현함
+- 클라이언트로의 모든 응답은 ResponseEntity를 이용할 것
+- ResponseEntity의 응답 바디에는 ResponseDTO를 전달할 것
+- ResponseDTO는 data와 error 속성을 가짐
+---
+### 📍 텀프로젝트 2 : [실행 영상](https://drive.google.com/file/d/1JLgnZXBjnoPwShQ9QkmrYXQ_W_betru6/view?usp=drive_link)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**1. 프론트엔드 서비스 구현 및 백엔드 서비스와 연결**
+- 현재 제품 리스트를 보여주는 UI 제공
+- 제품 정보 추가를 위한 UI 제공
+- 제품 검색을 위한 UI 제공
+- 제품 수정을 위한 UI 제공
+- 제품 삭제를 위한 UI 제공
 
-### `npm test`
+**2. 제한조건**
+- 반드시 SPA(Single Page Application)으로 구현한다.
+- React.js 라이브러리를 이용하여 구현한다.
+- material ui는 꼭 사용하지 않아도 된다.
+---
+### 📍 텀프로젝트 3 : [실행 영상](https://drive.google.com/file/d/1AxQbPt1rs0bb_Fp96rlAvFnt7tHttU-T/view?usp=drive_link)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**1. 백엔드에 인증 기능 구현**
+- JWT 방식의 인증, 필터 등 이용
+- 구현해야 하는 기능: 계정 생성 기능(sign up), 로그인 기능(sign in), 모든 기능(추가, 검색, 수정, 삭제) 요청 시 토큰 유효한지 검사하는 기능
 
-### `npm run build`
+**2. 프론트엔드에 인증 기능 구현**
+- 백엔드로 요청 시 로컬 스토리지에 저장된 토큰을 요청 헤더에 담아서 요청함
+- 구현해야 하는 기능: 로그인 기능 / 계정 생성 기능, 백엔드에 제품 정보 (추가, 검색, 수정, 삭제) 요청 시 요청 헤더에 토큰 추가
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**3. 프론트엔드 GUI 개선**
+- 제품 정보 추가, 검색, 수정, 삭제를 위한 메뉴 항목 제공
+- 각 메뉴 항목을 선택하면 해당 UI가 출력됨
+- 화면 맨 아래쪽에는 현재 DB의 내용을 보여주는 테이블이 항상 존재함
